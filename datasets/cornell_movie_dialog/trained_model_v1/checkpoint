@@ -1,1 +1,2 @@
-chk
+model_checkpoint_path: "best_weights_training.ckpt"
+all_model_checkpoint_paths: "best_weights_training.ckpt"
