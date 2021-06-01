@@ -9,6 +9,7 @@
 - Step 3: Go to this app's directory and run `python app.py`
 
 
+
 ## HTML : index.html 
 
 ~~~
@@ -234,6 +235,10 @@ def ajax():
 - to training: python train.py --datasetdir=datasets/cornell_movie_dialog
 
 - to run : python chat.py datasets/cornell_movie_dialog/trained_model_v1/best_weights_training.ckpt
+
+## Download movie dialogue corpus
+
+- https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html
 
 
 
