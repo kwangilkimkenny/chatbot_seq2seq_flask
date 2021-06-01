@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block page_title %}{% endblock %}
+
+{% block body %}
+    {{ super() }}
+
+    <!-- Banner -->
+    <section id="banner">
+        <h1>Welcome to Counseling AI</h1>
+        <p>If you need to talk, counseling AI!</p>
+    </section>
+
+    <h4>Counseling? Start right now. </h4>
+
+    <hr>
+    
+    <h3>Start Here</h3>
+    <div class="form-group">
+      <label for="textArea" class="col-lg-3 control-label">Write down your concerns.</label>
+      <br>
+      <div class="col-lg-9">
+      <form action="/result" method="POST">
+        <textarea class="form-control" name="Cover Letter:" ></textarea>
+        <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- One -->
+    <section id="one" class="wrapper">
+        <div class="inner">
+            <div class="flex flex-3">
+                <article>
+                    <header>
+                        <h3>AI How does AI work?</h3>
+                    </header>
+                    <p>In order to implement the consultation robot, we prepared and implemented conversation data here.</p>
+                    <footer>
+                        <a href="#" class="button special">More</a>
+                    </footer>
+                </article>
+                <article>
+                    <header>
+                        <h3>Start Analysis</h3>
+                    </header>
+                    <p>...</p>
+                    <footer>
+                        <a href="#" class="button special">More</a>
+                    </footer>
+                </article>
+                <article>
+                    <header>
+                        <h3>Viewing Analysis Results</h3>
+                    </header>
+                    <p>...</p>
+                    <footer>
+                        <a href="#" class="button special">More</a>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <p>For more information about AI, you can visit to <a href="https://tensorflow.org">Tensorflow</a>.</p>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block page_title %}Welcome{% endblock %}
+
+{% block body %}
+    {{ super() }}
+
+    <h4>...</h4>
+
+    <hr>
+    
+    <h3>...</h3>
+    <div class="form-group">
+      <label for="textArea" class="col-lg-3 control-label">....</label>
+      <div class="col-lg-9">
+      <form action="/result" method="POST">
+        <textarea class="form-control" name="Cover Letter:"></textarea>
+        <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <hr>
+
+
+
+    <h4>...r</h4>
+
+    {{ cv_letter }}
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h4>Result</h4>
+    {{result_emotions}}
+
+
+{% endblock %}

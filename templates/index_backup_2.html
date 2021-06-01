@@ -1,0 +1,214 @@
+{% extends "layout.html" %}
+
+{% block page_title %}{% endblock %}
+
+{% block body %}
+    {{ super() }}
+
+    <div id='bodybox'>
+        <div id='chatboarder'>
+          <p id="chatlog7" class="chatlog">&nbsp;</p>
+          <p id="chatlog6" class="chatlog">&nbsp;</p>
+          <p id="chatlog5" class="chatlog">&nbsp;</p>
+          <p id="chatlog4" class="chatlog">&nbsp;</p>
+          <p id="chatlog3" class="chatlog">&nbsp;</p>
+          <p id="chatlog2" class="chatlog">&nbsp;</p>
+          <p id="chatlog1" class="chatlog">&nbsp;</p>
+          <input type="text" name="chat" id="chatbox" value="Hi">
+        </div>
+        <br>
+        <br>
+
+        
+
+        <form action="/" method="POST">
+            <textarea class="form-control" name="Cover Letter:" ></textarea>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+
+
+        <h4>Emotion Check</h4>
+        {{result_emotions}}
+
+
+        <!-- <p id="example">AJAX</p>
+        <input type="text" id="id1" placeholder="id">
+        <input type="button" id="execute" value="execute">
+       -->
+
+        <center><img src="http://lilgreenland.github.io/images/BMO.jpg" align="middle"></center>
+      </div>
+
+<script>
+
+$('#chatbox').keydown(function(e){
+  if(e.keyCode == 13){
+            var id = $('#chatbox').val();
+            var postdata = {
+                'id':id
+            }
+            $.ajax({
+                type: 'POST',
+                url: '{{url_for("ajax")}}',
+                data: JSON.stringify(postdata),
+                dataType : 'JSON',
+                contentType: "application/json",
+                success: function(data){
+                    alert('성공! 데이터 값:' + data.result2['id'])
+                },
+                error: function(request, status, error){
+                    alert('ajax 통신 실패')
+                    alert(error);
+                }
+            })
+          }
+        })
+
+
+var messages = [], // 대화를 담기 위한 리스트 변수 설정
+    lastUserMessage = "", //사용자의 마지막 메시지 변수 선언 - 문자열
+    botMessage = "", // 봇의 메시지에 대한 변수 선언 - 역시 문자열
+    botName = 'Chatbot' // 쳇봇 이름 선언 - 문자열
+
+//var user_input = {{ user_input }};
+// var chatbot_input = {{ chatbot_input }};
+var chatbot_input = "nice!!!";
+
+// 쳇봇의 대화를 입력할 수 있다.
+function chatbotResponse() {
+    botMessage = "I'm confused..."; //기본 메시지
+
+    // 이하 조건문은 사용자의 입력을 받았을 때 어떤 답변을 해야 하는지에 대한 대화 조건이다.
+    if (lastUserMessage === 'hi') {
+        botMessage = 'Howdy!';
+    }
+
+    if (lastUserMessage === 'Tell me about your day. How has it been going?') {
+        botMessage = "I've been having a pretty good day.";
+    }
+
+    if (lastUserMessage === 'Are you a student? What is your occupation?') {
+        botMessage = 'Yes I am a student in high school.';
+    }
+
+    if (lastUserMessage === 'How are you sleeping these days? How many hours?') {
+        botMessage = "I've bleem sleeping well. I feel well-rested.";
+    }
+
+    if (lastUserMessage === 'How happy are you with your job? Tell me how fulfilling your job is.') {
+        botMessage = "I'm happy about my job.";
+    }
+
+    if (lastUserMessage === 'On average, how many hours do you sleep per night?') {
+        botMessage = "I've been getting about 8 hours of sleep.";
+    }
+
+    if (lastUserMessage === 'How regular are your sleep patterns?') {
+        botMessage = 'I sleep on a regular schedule, sleeping and waking up at around the same time.';
+    }
+
+    if (lastUserMessage === 'How much exercise are you getting?') {
+        botMessage = "I'm getting enough exercise every day. Probably an hour or two daily.";
+    }
+
+    if (lastUserMessage === 'How would you describe the current weather?') {
+        botMessage = "It's a great day. A nice day out.";
+    }
+
+    if (lastUserMessage === 'How often do you meet with your friends?') {
+        botMessage = 'I meet with them often and hang out over dinner.';
+    }
+
+    if (lastUserMessage === 'How is your relatinship with your family?') {
+        botMessage = 'Amazing. They are extremely supportive of me and I feel loved.';
+    }
+
+    if (lastUserMessage === 'Do you have a partner? Are you in a relationship?') {
+        botMessage = 'Yes.';
+    }
+
+    if (lastUserMessage === 'How satisfied are you with your partner?') {
+        botMessage = 'I am very happy about them. <He/She/They> support(s) me and we are in a healthy relationship.';
+    }
+
+    if (lastUserMessage === 'Do you have someone you can always talk to if you need it?') {
+        botMessage = 'Yes, I have someone I can trust and talk to about anything.';
+    }
+
+    if (lastUserMessage === 'How easy does it feel to voice your opinions?') {
+        botMessage = 'I feel like I can usually voice my opinions and tell my thoughts.';
+    }
+
+    if (lastUserMessage === 'How do others perceive you?') {
+        botMessage = 'People usually listen to me and respond to me.';
+    }
+
+    else if (lastUserMessage === 'name') {
+        botMessage = 'My name is ' + botName;
+    }
+
+    else if (lastUserMessage === "hello") {
+        botMessage = chatbot_input;
+    }
+
+    // 쳇봇 파이선과 연동하여 여기 값을 파이썬코드로 보내고 다시 결과값을 가져오는 것으로 코드 구현할 것
+}
+
+//
+// 대화를 입력하고 엔터를 쳤을 때 
+// 입출력 경과에 대한 함수임
+function newEntry() {
+    // 사용자가 입력창(chatbox)에 뭐라도 입력하면 실행한다.
+    // 입력창이 비어있지 않다면 
+    if (document.getElementById("chatbox").value != "") {
+        // chatbox의 값을 가져와서 lastUserMessage에 넣는다.
+        lastUserMessage = document.getElementById("chatbox").value;
+        //그리고 나서, chatbox의 값을 비워버린다. 즉, 빈 문자열을 가져와서 채운다.
+        document.getElementById("chatbox").value = "";
+        // 대화 리스트에 마지막 문자(위에서 입력한 뭐라도...)열을 담는다.
+        messages.push(lastUserMessage);
+        // 그리고나서, 답변함수를 실행한다.
+        chatbotResponse()
+        //쳇봇의 이름과 쳇봇이 생성한 메시지를 메시지리스트에 넣느다.
+        messages.push("<b>" + botName + ":</b> " + botMessage)
+        // 메시지를 text to speech function written 기능으로 구현한다. 
+        Speech(botMessage);
+        //8단계의 대화까지만 html 창에 출력한다. 로그에 기록한다.
+        for (var i = 1; i < 8; i++) {
+            if (messages[messages.length - i])
+            // 쳇로그에 저장된 문자열을 가져온다. 그 문자열은 html로 구현한 대화들이다.
+                document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
+        }
+    }
+}
+
+//text to Speech
+//https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
+function Speech(say) {
+    if ('speechSynthesis' in window) {
+        var utterance = new SpeechSynthesisUtterance(say);
+        //utterance.volume = 1; // 0 to 1
+        //utterance.rate = 1; // 0.1 to 10
+        //utterance.pitch = 1; //0 to 2
+        //utterance.text = 'Hello World';
+        //utterance.lang = 'en-US';
+        speechSynthesis.speak(utterance);
+    }
+}
+
+//runs the keypress() function when a key is pressed
+document.onkeypress = keyPress;
+//if the key pressed is 'enter' runs the function newEntry()
+function keyPress(e) {
+    var x = e || window.event;
+    var key = (x.keyCode || x.which);
+    // 13번이 enter 키다. enter 값이 key에 할당되거나 아니면 다른 어떤 키값이 입력된다면, 즉시 newEntry() 함수 실행
+    if (key == 13 || key == 3) {
+        newEntry();
+    }
+}
+</script>
+
+{% endblock %}
+
+
